@@ -31,10 +31,10 @@ dnsIp=$(echo $result | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b")
 currentIp=$(curl -s GET "https://ipv4.wtfismyip.com/text")
 echo "currentIp:" $currentIp
 
- if [ $dnsIp != $currentIp ];
+if [ $dnsIp != $currentIp ];
  then
 	# echo "Ips are not equal" ## debug
-	request='{"data":"'$currentIp'","ttl":600}'
+	request='[{"data":"'$currentIp'","name":"'$name'","ttl":600,"type":"A"}]'
 	# echo $request # debug
 	nresult=$(curl -i -s -X PUT \
  -H "$headers" \
