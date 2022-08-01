@@ -25,7 +25,7 @@ result=$(curl -s -X GET -H "$headers" \
  "https://api.godaddy.com/v1/domains/$domain/records/A/$name")
 
 dnsIp=$(echo $result | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b")
-# echo "dnsIp:" $dnsIp # debug
+echo "dnsIp:" $dnsIp
 
 # Get public ip address there are several websites that can do this.
 currentIp=$(curl -s GET "https://ipv4.wtfismyip.com/text")
