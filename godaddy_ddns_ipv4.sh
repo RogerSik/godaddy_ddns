@@ -12,17 +12,17 @@
 #
 #Update the first 4 variables with your information
 
-domain=""   # your domain
-name=""     # name of A record to update
-key=""      # key for godaddy developer API
-secret=""   # secret for godaddy developer API
+domain="" # your domain
+name=""   # name of A record to update
+key=""    # key for godaddy developer API
+secret="" # secret for godaddy developer API
 
 headers="Authorization: sso-key $key:$secret"
 
 # echo $headers # debug
 
 result=$(curl -s -X GET -H "$headers" \
- "https://api.godaddy.com/v1/domains/$domain/records/A/$name")
+  "https://api.godaddy.com/v1/domains/$domain/records/A/$name")
 
 dnsIp=$(echo $result | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b")
 echo "dnsIp:" $dnsIp
@@ -31,15 +31,14 @@ echo "dnsIp:" $dnsIp
 currentIp=$(curl -s GET "https://ipv4.wtfismyip.com/text")
 echo "currentIp:" $currentIp
 
-if [ $dnsIp != $currentIp ];
- then
-	echo "Ips are not equal"
-	request='[{"data":"'$currentIp'","name":"'$name'","ttl":600,"type":"A"}]'
-	# echo $request # debug
-	nresult=$(curl -i -s -X PUT \
- -H "$headers" \
- -H "Content-Type: application/json" \
- -d $request "https://api.godaddy.com/v1/domains/$domain/records/A/$name")
-	echo $nresult
+if [ $dnsIp != $currentIp ]; then
+  echo "Ips are not equal"
+  request='[{"data":"'$currentIp'","name":"'$name'","ttl":600,"type":"A"}]'
+  # echo $request # debug
+  nresult=$(curl -i -s -X PUT \
+    -H "$headers" \
+    -H "Content-Type: application/json" \
+    -d $request "https://api.godaddy.com/v1/domains/$domain/records/A/$name")
+  echo $nresult
   echo "dns record updated"
 fi
