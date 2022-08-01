@@ -1,4 +1,4 @@
-Forked from [gist mcarpenterjr/godaddy_ddns.sh](https://gist.github.com/mcarpenterjr/1dedf9f9f842710ba5f07937ef4f5ae49)
+Forked from [gist mcarpenterjr/godaddy_ddns.sh](https://gist.github.com/mcarpenterjr/1dedf9f9f842710ba5f07937ef4f5ae4)
 
 Changes:
 
