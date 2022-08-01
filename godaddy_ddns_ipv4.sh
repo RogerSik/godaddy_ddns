@@ -33,7 +33,7 @@ echo "currentIp:" $currentIp
 
 if [ $dnsIp != $currentIp ];
  then
-	# echo "Ips are not equal" ## debug
+	echo "Ips are not equal"
 	request='[{"data":"'$currentIp'","name":"'$name'","ttl":600,"type":"A"}]'
 	# echo $request # debug
 	nresult=$(curl -i -s -X PUT \
@@ -41,4 +41,5 @@ if [ $dnsIp != $currentIp ];
  -H "Content-Type: application/json" \
  -d $request "https://api.godaddy.com/v1/domains/$domain/records/A/$name")
 	echo $nresult
+  echo "dns record updated"
 fi
